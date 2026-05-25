@@ -1,0 +1,25 @@
+name: smoke
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        options: [dev, production]
+        default: dev
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  whoami:
+    runs-on: ubuntu-22.04
+    environment: ${{ inputs.env }}
+    steps:
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT }}:role/gha-deploy-${{ inputs.env == 'production' && 'prod' || 'dev' }}
+          aws-region: us-east-1
+      - run: aws sts get-caller-identity
+      - run: aws s3 ls "s3://nfcu-s1-models-${{ github.repository_owner }}/"
+      - run: aws dynamodb describe-table --table-name model-deployment-audit --query 'Table.TableStatus'
