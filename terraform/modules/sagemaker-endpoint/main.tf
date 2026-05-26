@@ -148,18 +148,24 @@ resource "aws_sagemaker_endpoint" "this" {
   name                 = local.endpoint_name
   endpoint_config_name = aws_sagemaker_endpoint_configuration.this.name
 
-  deployment_config {
-    rolling_update_policy {
-      maximum_batch_size {
-        type  = "INSTANCE_COUNT"
-        value = 1
+  # SageMaker rejects rolling-update batches >50% of desired capacity, so the
+  # policy is only meaningful with 2+ instances. Dev runs a single instance to
+  # keep cost down and skips the block entirely.
+  dynamic "deployment_config" {
+    for_each = var.instance_count >= 2 ? [1] : []
+    content {
+      rolling_update_policy {
+        maximum_batch_size {
+          type  = "INSTANCE_COUNT"
+          value = 1
+        }
+        wait_interval_in_seconds             = 60
+        maximum_execution_timeout_in_seconds = 3600
       }
-      wait_interval_in_seconds                  = 60
-      maximum_execution_timeout_in_seconds      = 3600
-    }
-    auto_rollback_configuration {
-      alarms {
-        alarm_name = aws_cloudwatch_metric_alarm.endpoint_5xx.alarm_name
+      auto_rollback_configuration {
+        alarms {
+          alarm_name = aws_cloudwatch_metric_alarm.endpoint_5xx.alarm_name
+        }
       }
     }
   }
