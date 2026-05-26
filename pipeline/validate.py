@@ -100,9 +100,9 @@ def extract_if_tarball(path: Path) -> Path:
         extract_to.mkdir(parents=True, exist_ok=True)
         with tarfile.open(path, "r:gz") as tar:
             tar.extractall(extract_to)
-        # Tarball convention: model-vX.Y.Z/ as the root entry.
-        children = [p for p in extract_to.iterdir() if p.is_dir()]
-        return children[0] if len(children) == 1 else extract_to
+        # Artifact files (model.pkl, signature.json, metadata.json, model_card.md)
+        # live at the tarball root; inference handler ships under code/.
+        return extract_to
     fail(EXIT_SCHEMA, f"Schema check — artifact path {path} is neither dir nor tar.gz")
 
 
