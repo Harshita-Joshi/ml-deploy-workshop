@@ -71,6 +71,8 @@ jobs:
   # Stage 3: containerize. Build the inference image, Trivy scan, push to ECR,
   # cosign-sign the image with the image-signing KMS key.
   containerize:
+    # Lab 2: change `if: false` to `if: true` to enable the container stage.
+    if: false
     needs: validate-artifact
     runs-on: ubuntu-22.04
     outputs:
@@ -173,6 +175,8 @@ jobs:
   # Stage 4: terraform apply against the dev environment composition.
   # Emits the audit event as the final step.
   terraform-apply-dev:
+    # Lab 3: change `if: false` to `if: true` to enable terraform apply.
+    if: false
     needs: containerize
     runs-on: ubuntu-22.04
     environment: dev
