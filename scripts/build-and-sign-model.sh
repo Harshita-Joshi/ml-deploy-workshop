@@ -47,10 +47,19 @@ m["training_dataset_sha256"] = "${DATASET_SHA}"
 p.write_text(json.dumps(m, indent=2) + "\n")
 PY
 
+echo "==> Stage tarball contents (inference.py must live under code/ so the"
+echo "    SageMaker container's SAGEMAKER_SUBMIT_DIRECTORY=/opt/ml/model/code resolves)"
+STAGE="${WORKDIR}/stage"
+mkdir -p "${STAGE}/code"
+cp "${MODEL_DIR}/model.pkl"       "${STAGE}/"
+cp "${MODEL_DIR}/signature.json"  "${STAGE}/"
+cp "${MODEL_DIR}/metadata.json"   "${STAGE}/"
+cp "${MODEL_DIR}/model_card.md"   "${STAGE}/"
+cp "${MODEL_DIR}/inference.py"    "${STAGE}/code/"
+
 echo "==> Build tarball"
 TARBALL="${WORKDIR}/model.tar.gz"
-tar -czf "${TARBALL}" -C "${MODEL_DIR}" \
-  model.pkl inference.py signature.json metadata.json model_card.md
+tar -czf "${TARBALL}" -C "${STAGE}" .
 
 echo "==> Cosign sign-blob (KMS-backed model-signing key)"
 SIGNATURE="${WORKDIR}/model.bundle"
