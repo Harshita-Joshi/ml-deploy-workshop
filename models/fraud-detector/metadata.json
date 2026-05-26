@@ -3,7 +3,7 @@
   "model_version": "1.0.0",
   "training_run_id": "lab-train-2026-05-15-abc123",
   "training_dataset": "uci-adult-2024-snapshot",
-  "training_dataset_sha256": "REPLACE_AT_BUILD_TIME",
+  "training_dataset_sha256": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
   "hyperparameters": {
     "max_depth": 6,
     "n_estimators": 100,
