@@ -96,9 +96,12 @@ jobs:
         run: |
           ACCOUNT="${{ vars.AWS_ACCOUNT }}"
           REGISTRY="${ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+          # Filter to tagged images only — cosign sign pushes an untagged
+          # sibling signature object that otherwise sorts as the newest entry
+          # and yields tag=None.
           DIGEST=$(aws ecr describe-images \
             --repository-name "${ECR_REPOSITORY}" \
-            --query 'reverse(sort_by(imageDetails,& imagePushedAt))[0].imageDigest' \
+            --query 'reverse(sort_by(imageDetails[?imageTags != null],& imagePushedAt))[0].imageDigest' \
             --output text)
           TAG=$(aws ecr describe-images \
             --repository-name "${ECR_REPOSITORY}" \
