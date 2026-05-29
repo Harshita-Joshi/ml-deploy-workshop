@@ -1,6 +1,6 @@
-# NFCU Session 1 — From Model Registry to Production Endpoint
+# ML Deploy Workshop — From Model Registry to Production Endpoint
 
-ML deployment pipelines with GitHub Actions and Terraform. Companion repo for the June 2, 2026 NFCU workshop.
+ML deployment pipelines with GitHub Actions and Terraform. Workshop template demonstrating end-to-end supply-chain integrity for SageMaker model deploys.
 
 ## What this repo does
 

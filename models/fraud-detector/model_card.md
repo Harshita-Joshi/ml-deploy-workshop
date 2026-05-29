@@ -9,7 +9,7 @@
 ## Intended Use
 This is a workshop training artifact. It demonstrates the deployment pipeline
 mechanics (validate → containerize → deploy → audit) that any production
-binary classifier at NFCU would flow through. The model itself is a stand-in,
+binary classifier in production would flow through. The model itself is a stand-in,
 not a credit-decisioning model.
 
 ## Training Data
@@ -39,6 +39,6 @@ their use.
 - Pipeline: sklearn ColumnTransformer(OneHotEncoder) → XGBClassifier
 
 ## Contact
-NFCU Workshop Team. Replace this section with the real model owner before any
+Workshop Team. Replace this section with the real model owner before any
 non-workshop use.
 

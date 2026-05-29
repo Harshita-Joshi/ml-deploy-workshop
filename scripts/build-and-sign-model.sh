@@ -13,7 +13,7 @@ set -euo pipefail
 
 AWS_REGION="${AWS_REGION:-us-east-1}"
 GH_OWNER="${GH_OWNER:?Set GH_OWNER to your GitHub username}"
-GH_REPO="${GH_REPO:-nfcu-s1-demo}"
+GH_REPO="${GH_REPO:-ml-deploy-workshop}"
 
 # Prefer the MODEL_BUCKET repo variable set by the bootstrap; fall back to an
 # explicit S3_BUCKET env override; error out if neither is available so we

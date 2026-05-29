@@ -12,7 +12,7 @@ provider "aws" {
   region = var.aws_region
   default_tags {
     tags = {
-      Project     = "nfcu-s1-demo"
+      Project     = "ml-deploy-workshop"
       Environment = "dev"
       ManagedBy   = "terraform"
     }

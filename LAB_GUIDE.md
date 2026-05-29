@@ -14,8 +14,8 @@ aws sts get-caller-identity
 gh auth status
 
 # Pull your fork
-cd ~ && git clone https://github.com/<your-gh>/nfcu-s1-demo.git
-cd nfcu-s1-demo
+cd ~ && git clone https://github.com/<your-gh>/ml-deploy-workshop.git
+cd ml-deploy-workshop
 ```
 
 The instructor will confirm everyone's bootstrap stack is in place before starting.
