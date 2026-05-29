@@ -184,7 +184,7 @@ jobs:
   # Emits the audit event as the final step.
   terraform-apply-dev:
     # Lab 3: change `if: false` to `if: true` to enable terraform apply.
-    if: false
+    if: true
     needs: containerize
     runs-on: ubuntu-22.04
     environment: dev
