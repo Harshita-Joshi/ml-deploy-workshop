@@ -72,7 +72,7 @@ jobs:
   # cosign-sign the image with the image-signing KMS key.
   containerize:
     # Lab 2: change `if: false` to `if: true` to enable the container stage.
-    if: false
+    if: true
     needs: validate-artifact
     runs-on: ubuntu-22.04
     outputs:
