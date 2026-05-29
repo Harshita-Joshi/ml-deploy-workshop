@@ -3,7 +3,7 @@
 # Demo step E (fail-closed): change this to "latest" and watch the pipeline halt.
 
 aws_region    = "us-east-1"
-model_version = "latest"
+model_version = "1.0.0"
 
 # These five values are populated per session from the bootstrap stack's
 # outputs (/tmp/nfcu-bootstrap-outputs.json). See the pre-req setup steps in
